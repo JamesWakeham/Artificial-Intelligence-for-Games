@@ -5,6 +5,10 @@
 #include "Texture.h"
 #include "Font.h"
 
+#include <glm\mat3x3.hpp>
+#include <glm\glm.hpp>
+#include <glm\gtc\type_ptr.hpp>
+
 Application2D::Application2D() {
 
 }
@@ -15,7 +19,7 @@ Application2D::~Application2D() {
 
 bool Application2D::startup() {
 	
-	createWindow("A.I. Project", 1280, 720);
+	createWindow("A.I. Project", 1600, 900);
 
 	m_spriteBatch = new SpriteBatch();
 
@@ -52,17 +56,18 @@ void Application2D::draw() {
 
 	// begin drawing sprites
 	m_spriteBatch->begin();
+	glm::mat3 testMat = glm::mat3(0.1f, 0, 0, 0, 0.1f, 0, 50, 50, 1);
+	//m_spriteBatch->drawSprite(m_texture, 200, 200, 100, 100);
+	m_spriteBatch->drawSpriteTransformed3x3(m_texture, glm::value_ptr(testMat));
 
-	m_spriteBatch->drawSprite(m_texture, 200, 200, 100, 100);
+	//m_spriteBatch->drawLine(300, 300, 600, 400, 10, 1);
 
-	m_spriteBatch->drawLine(300, 300, 600, 400, 10, 1);
+	//m_spriteBatch->setSpriteColor(1, 0, 0, 1);
+	//m_spriteBatch->drawSprite(nullptr, 400, 400, 50, 50, 3.14159f * 0.25f);
 
-	m_spriteBatch->setSpriteColor(1, 0, 0, 1);
-	m_spriteBatch->drawSprite(nullptr, 400, 400, 50, 50, 3.14159f * 0.25f);
-
-	m_spriteBatch->setSpriteColor(0, 1, 1, 1);
-	m_spriteBatch->drawText(m_font, "OMG BBQ!", 200, 400);
-	m_spriteBatch->drawText(m_font, "Yeaaahhhhh", 200, 300);
+	//m_spriteBatch->setSpriteColor(0, 1, 1, 1);
+	//m_spriteBatch->drawText(m_font, "OMG BBQ!", 200, 400);
+	//m_spriteBatch->drawText(m_font, "Yeaaahhhhh", 200, 300);
 
 	// done drawing sprites
 	m_spriteBatch->end();	
