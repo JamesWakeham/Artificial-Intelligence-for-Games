@@ -9,8 +9,16 @@
 #include <glm\glm.hpp>
 #include <glm\gtc\type_ptr.hpp>
 
-Application2D::Application2D() {
 
+Application2D::Application2D() 
+{
+	for (int x = 0; x < 10; x++)
+	{
+		for (int y = 0; y < 10; y++)
+		{
+			grid[x][y] = Node(glm::vec2(x, y));
+		}
+	}
 }
 
 Application2D::~Application2D() {
@@ -19,7 +27,7 @@ Application2D::~Application2D() {
 
 bool Application2D::startup() {
 	
-	createWindow("A.I. Project", 1600, 900);
+	createWindow("A.I. Project", 500, 500);
 
 	m_spriteBatch = new SpriteBatch();
 
@@ -57,9 +65,14 @@ void Application2D::draw() {
 	// begin drawing sprites
 	m_spriteBatch->begin();
 	glm::mat3 testMat = glm::mat3(0.1f, 0, 0, 0, 0.1f, 0, 50, 50, 1);
-	//m_spriteBatch->drawSprite(m_texture, 200, 200, 100, 100);
 	m_spriteBatch->drawSpriteTransformed3x3(m_texture, glm::value_ptr(testMat));
-
+	for (int x = 0; x < 10; x++)
+	{
+		for (int y = 0; y < 10; y++)
+		{
+			m_spriteBatch->drawSprite(m_texture, grid[x][y].pos.x*50 +25, grid[x][y].pos.y * 50 + 25, 10, 10);
+		}
+	}
 	//m_spriteBatch->drawLine(300, 300, 600, 400, 10, 1);
 
 	//m_spriteBatch->setSpriteColor(1, 0, 0, 1);

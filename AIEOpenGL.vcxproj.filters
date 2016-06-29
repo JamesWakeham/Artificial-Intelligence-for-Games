@@ -39,6 +39,9 @@
     <ClCompile Include="src\Font.cpp">
       <Filter>BaseCode</Filter>
     </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\gl_core_4_4.h">
@@ -58,6 +61,9 @@
     </ClInclude>
     <ClInclude Include="src\Font.h">
       <Filter>BaseCode</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

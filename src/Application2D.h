@@ -1,13 +1,14 @@
 #pragma once
 
 #include "BaseApplication.h"
-
+#include "Node.h"
 class SpriteBatch;
 class Texture;
 class Font;
 
 class Application2D : public BaseApplication {
 public:
+	Node grid[10][10];
 
 	Application2D();
 	virtual ~Application2D();
