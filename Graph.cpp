@@ -47,51 +47,52 @@ void Graph::AddConnection(Node * n1, Node * n2)
 	n1->connections.push_back(*connect);
 }
 
-void Graph::FindShortestPath(Node * start, const std::list<Node*>& potentialEndNodes, std::list<Node*>& outPath)
+void Graph::FindShortestPath(Node * start, std::list<Node*> potentialEndNodes)
 {
-	//std::list<Node *> openList;
-	//std::list<Node *> closedList;
+	std::list<Node*> openList;
+	std::list<Node*> closedList;
 
-	//Node* endNode = nullptr;
+	Node* endNode = nullptr;
 
-	//openList.push_back(start);
-	//Graph::Node *currentNode = nullptr;
-	//while (!openList.empty) 
-	//{
-	//	openList.sort([](const Graph::Node & a, const Graph::Node & b) { return a.gScore < b.gScore; });
-	//	currentNode = &openList.front;
-	//	bool isPotentialEnd =false;
-	//	for each (Graph::Node* var in potentialEndNodes)
-	//	{
-	//		if (var == currentNode) {
-	//			isPotentialEnd = true;
-	//			break;
-	//		}
-	//	}
-	//	if (isPotentialEnd) {
-	//		openList.remove(currentNode);
-	//		closedList.push_back(currentNode);
-	//	}
-	//	for each (Graph::Edge* var in currentNode->connections)
-	//	{
-	//		std::list<Graph::Node>::iterator findInClosed = std::find(closedList.begin, closedList.end, var);
-	//		if (findInClosed == closedList.end) {
-	//			//not found
-	//			openList.push_back(var->connection);
-	//			var->connection->gScore = currentNode->gScore + var->cost;
-	//			var->connection->parent = currentNode;
-	//		}
-	//		else {
-	//			//found
-	//		}
-	//	}
-	//}
-	//std::list<Graph::Node*> path;
-	//currentNode = endNode;
-	//while (currentNode != NULL) {
-	//	path.push_back(currentNode);
-	//	currentNode = currentNode->parent;
-	//}
+	openList.push_back(start);
+	Graph::Node *currentNode = nullptr;
+	while (!openList.empty()) 
+	{
+		openList.sort([](const Graph::Node* a, const Graph::Node* b) { return a->gScore < b->gScore; });
+		currentNode = openList.front();
+		bool isPotentialEnd =false;
+		for each (Graph::Node var in grid)
+		{
+			if (&var == currentNode) {
+				isPotentialEnd = true;
+				break;
+			}
+		}
+		if (isPotentialEnd) {
+			openList.remove(currentNode);
+			closedList.push_back(currentNode);
+		}
+		for each (Edge var in currentNode->connections)
+		{
+			std::list<Node*>::iterator findInClosed = std::find(closedList.begin(), closedList.end(), var.connection);
+			if (findInClosed == closedList.end()) {
+				//not found
+				openList.push_back(var.connection);
+				var.connection->gScore = currentNode->gScore + var.cost;
+				var.connection->parent = currentNode;
+			}
+			else {
+				//found
+			}
+		}
+	}
+	std::list<Graph::Node*> path;
+	currentNode = endNode;
+	while (currentNode != NULL) {
+		currentNode->traversed = true;
+		path.push_back(currentNode);
+		currentNode = currentNode->parent;
+	}
 }
 
 void Graph::FindNodesInRange(std::vector<Node*>& outNodes, float xPos, float yPos, float radius)

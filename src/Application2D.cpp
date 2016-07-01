@@ -15,6 +15,9 @@ Graph graph;
 
 Application2D::Application2D() 
 {
+	std::list<Graph::Node*> endNodes;
+	endNodes.push_back(&graph.grid[9][9]);
+	graph.FindShortestPath(&graph.grid[0][0], endNodes);
 }
 
 Application2D::~Application2D() {
