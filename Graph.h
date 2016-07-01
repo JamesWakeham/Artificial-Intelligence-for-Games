@@ -8,6 +8,7 @@ public:
 	struct Node;
 	struct Edge
 	{
+		bool tested = false, traversed = false;
 		Node *connection;
 		float cost;
 		// default constructor
@@ -22,22 +23,22 @@ public:
 
 	struct Node
 	{
+		bool tested = false, traversed = false;
 		glm::vec2 pos;
 		float gScore;
 		Node *parent;
-		std::vector< Graph::Edge > connections;
+		std::vector<Edge> connections;
 		// default constructor
 		Node() : pos(0, 0), gScore(0), parent(nullptr) {}
 		// overloaded constructor
 		Node(glm::vec2 a_pos) : pos(a_pos), gScore(0), parent(nullptr) {}
 		// overloaded constructor
 		Node(glm::vec2 a_pos, float a_gScore, Node *a_parent) :
-			pos(a_pos), gScore(0), parent(a_parent) {}
+			pos(a_pos), gScore(a_gScore), parent(a_parent) {}
 	};
 
 	Graph();
 	virtual ~Graph();
-	
 	Node grid[10][10];
 
 	Node *AddNode(int xPos, int yPos);

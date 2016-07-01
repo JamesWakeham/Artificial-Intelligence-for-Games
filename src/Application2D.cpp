@@ -60,11 +60,21 @@ void Application2D::draw() {
 
 	// begin drawing sprites
 	m_spriteBatch->begin();
-	for (int x = 0; x < 10; x++)
+
+	for each (Graph::Node n in graph.grid)
 	{
-		for (int y = 0; y < 10; y++)
+		m_spriteBatch->setSpriteColor(1, 1, 1, 1);
+		if (n.tested){ m_spriteBatch->setSpriteColor(1, 0, 1, 1); }
+		if (n.traversed){ m_spriteBatch->setSpriteColor(1, 0, 0, 1); }
+
+		m_spriteBatch->drawSprite(m_texture, n.pos.x * 50 + 25, n.pos.y * 50 + 25, 10, 10);
+		for each (Graph::Edge e in n.connections)
 		{
-			m_spriteBatch->drawSprite(m_texture, graph.grid[x][y].pos.x*50+25, graph.grid[x][y].pos.y * 50+25, 10, 10);
+			m_spriteBatch->setSpriteColor(1, 1, 1, 1);
+			if (e.tested) { m_spriteBatch->setSpriteColor(1, 0, 1, 1); }
+			if (e.traversed) { m_spriteBatch->setSpriteColor(1, 0, 0, 1); }
+
+			m_spriteBatch->drawLine(n.pos.x * 50 + 25, n.pos.y * 50 + 25, e.connection->pos.x * 50 + 25, e.connection->pos.y * 50 + 25, 1, 1);
 		}
 	}
 
