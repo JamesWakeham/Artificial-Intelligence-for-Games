@@ -2,9 +2,11 @@
 #include "Graph.h"
 #include <iostream>
 #include <list>
+
 bool ReturnGScore(const Graph::Node & _nodea, const Graph::Node & _nodeb) {
 	return _nodea.gScore < _nodeb.gScore;
 }
+
 int main() {
 	//std::list<Graph::Node> openList;
 	//openList.push_front(Graph::Node(glm::vec2(1,4),13,nullptr));

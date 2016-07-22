@@ -11,13 +11,14 @@
 #include <glm\glm.hpp>
 #include <glm\gtc\type_ptr.hpp>
 
-Graph graph;
+Graph * graph;
 
 Application2D::Application2D() 
 {
+	graph = new Graph();
 	std::list<Graph::Node*> endNodes;
-	endNodes.push_back(&graph.grid[9][9]);
-	graph.FindShortestPath(&graph.grid[0][0], endNodes);
+	endNodes.push_back(&graph->grid[8][8]);
+	graph->FindShortestPath(&graph->grid[1][1], endNodes);
 }
 
 Application2D::~Application2D() {
@@ -64,19 +65,16 @@ void Application2D::draw() {
 	// begin drawing sprites
 	m_spriteBatch->begin();
 
-	for each (Graph::Node n in graph.grid)
+	for each (Graph::Node n in graph->grid)
 	{
 		m_spriteBatch->setSpriteColor(1, 1, 1, 1);
-		if (n.tested){ m_spriteBatch->setSpriteColor(1, 0, 1, 1); }
+		if (n.tested){ m_spriteBatch->setSpriteColor(1, 0.5f, 1, 1); }
 		if (n.traversed){ m_spriteBatch->setSpriteColor(1, 0, 0, 1); }
 
 		m_spriteBatch->drawSprite(m_texture, n.pos.x * 50 + 25, n.pos.y * 50 + 25, 10, 10);
 		for each (Graph::Edge e in n.connections)
 		{
 			m_spriteBatch->setSpriteColor(1, 1, 1, 1);
-			if (e.tested) { m_spriteBatch->setSpriteColor(1, 0, 1, 1); }
-			if (e.traversed) { m_spriteBatch->setSpriteColor(1, 0, 0, 1); }
-
 			m_spriteBatch->drawLine(n.pos.x * 50 + 25, n.pos.y * 50 + 25, e.connection->pos.x * 50 + 25, e.connection->pos.y * 50 + 25, 1, 1);
 		}
 	}
