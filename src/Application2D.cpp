@@ -75,7 +75,7 @@ void Application2D::draw() {
 		for each (Graph::Edge e in n.connections)
 		{
 			m_spriteBatch->setSpriteColor(1, 1, 1, 1);
-			m_spriteBatch->drawLine(n.pos.x * 50 + 25, n.pos.y * 50 + 25, e.connection->pos.x * 50 + 25, e.connection->pos.y * 50 + 25, 1, 1);
+			m_spriteBatch->drawLine(n.pos.x * 50 + 25, n.pos.y * 50 + 25, e.connection->pos.x * 50 + 25, e.connection->pos.y * 50 + 25, e.cost*2, 1);
 		}
 	}
 

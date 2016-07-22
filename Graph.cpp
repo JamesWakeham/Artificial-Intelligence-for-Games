@@ -2,8 +2,17 @@
 #include <iostream>
 #include <memory>
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
 Graph::Graph()
 {
+	srand(time(NULL));
+	float randomNumb = rand() % 5 + 1;
+
+	
+
 	for (int x = 0; x < 10; x++)
 	{
 		for (int y = 0; y < 10; y++)
@@ -15,16 +24,15 @@ Graph::Graph()
 	{
 		for (int y = 0; y < 10; y++)
 		{
-			if (x - 1 >= 0)       AddConnection(&grid[x][y], &grid[x - 1][y], 1);
-			//if (x - 1 >= 0 && y - 1 >= 0)   AddConnection(&grid[x][y], &grid[x - 1][y - 1], 1.41f);
-			//if (x - 1 >= 0 && y + 1 < 10)  AddConnection(&grid[x][y], &grid[x - 1][y + 1], 1.41f);
+			if (x - 1 >= 0)       AddConnection(&grid[x][y], &grid[x - 1][y], rand() % 3 );
+			if (y - 1 >= 0)	    AddConnection(&grid[x][y], &grid[x][y - 1], rand() % 3 );
+			if (y + 1 < 10)	    AddConnection(&grid[x][y], &grid[x][y + 1], rand() % 3 );
+			if (x + 1 < 10)      AddConnection(&grid[x][y], &grid[x + 1][y], rand() % 3 );
 
-			if (y - 1 >= 0)	    AddConnection(&grid[x][y], &grid[x][y - 1],1);
-			if (y + 1 < 10)	    AddConnection(&grid[x][y], &grid[x][y + 1],1);
-
-			if (x + 1 < 10)      AddConnection(&grid[x][y], &grid[x + 1][y], 1);
 			//if (x + 1 < 10 && y - 1 >= 0)  AddConnection(&grid[x][y], &grid[x + 1][y - 1], 1.41f);
 			//if (x + 1 < 10 && y + 1 < 10) AddConnection(&grid[x][y], &grid[x + 1][y + 1], 1.41f);
+			//if (x - 1 >= 0 && y - 1 >= 0)   AddConnection(&grid[x][y], &grid[x - 1][y - 1], 1.41f);
+			//if (x - 1 >= 0 && y + 1 < 10)  AddConnection(&grid[x][y], &grid[x - 1][y + 1], 1.41f);
 		}
 	}
 }
