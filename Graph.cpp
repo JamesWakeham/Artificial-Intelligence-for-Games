@@ -24,10 +24,15 @@ Graph::Graph()
 	{
 		for (int y = 0; y < 10; y++)
 		{
-			if (x - 1 >= 0)       AddConnection(&grid[x][y], &grid[x - 1][y], rand() % 3 );
-			if (y - 1 >= 0)	    AddConnection(&grid[x][y], &grid[x][y - 1], rand() % 3 );
-			if (y + 1 < 10)	    AddConnection(&grid[x][y], &grid[x][y + 1], rand() % 3 );
-			if (x + 1 < 10)      AddConnection(&grid[x][y], &grid[x + 1][y], rand() % 3 );
+			//if (x - 1 >= 0)       AddConnection(&grid[x][y], &grid[x - 1][y], rand() % 3 );
+			//if (y - 1 >= 0)	    AddConnection(&grid[x][y], &grid[x][y - 1], rand() % 3 );
+			//if (y + 1 < 10)	    AddConnection(&grid[x][y], &grid[x][y + 1], rand() % 3 );
+			//if (x + 1 < 10)      AddConnection(&grid[x][y], &grid[x + 1][y], rand() % 3 );
+
+			if (x - 1 >= 0)       AddConnection(&grid[x][y], &grid[x - 1][y], 1);
+			if (y - 1 >= 0)	    AddConnection(&grid[x][y], &grid[x][y - 1], 1);
+			if (y + 1 < 10)	    AddConnection(&grid[x][y], &grid[x][y + 1], 1);
+			if (x + 1 < 10)      AddConnection(&grid[x][y], &grid[x + 1][y], 1);
 
 			//if (x + 1 < 10 && y - 1 >= 0)  AddConnection(&grid[x][y], &grid[x + 1][y - 1], 1.41f);
 			//if (x + 1 < 10 && y + 1 < 10) AddConnection(&grid[x][y], &grid[x + 1][y + 1], 1.41f);
@@ -56,8 +61,15 @@ void Graph::AddConnection(Node * n1, Node * n2,float cost)
 	n1->connections.push_back(*connect);
 }
 
-void Graph::FindShortestPath(Node * start, std::list<Node*> potentialEndNodes)
+std::list<Graph::Node*> Graph::FindShortestPath(Node * start, std::list<Node*> potentialEndNodes)
 {
+	for (int x = 0; x < 10; x++)
+	{
+		for (int y = 0; y < 10; y++)
+		{
+			grid[x][y].parent = nullptr;
+		}
+	}
 	int gScore =0;
 	//openList is list of nodes
 	std::list<Node*> openList;
@@ -133,14 +145,11 @@ void Graph::FindShortestPath(Node * start, std::list<Node*> potentialEndNodes)
 	std::list<Graph::Node*> path;
 	currentNode = potentialEndNodes.front();
 	while (currentNode != NULL) {
+		std::cout << "checking path" << std::endl;
 		currentNode->traversed = true;
 		path.push_back(currentNode);
 		currentNode = currentNode->parent;
 	}
 	std::cout << "Path Generated with " << path.size() << " Hops" << std::endl;
-}
-
-void Graph::FindNodesInRange(std::vector<Node*>& outNodes, float xPos, float yPos, float radius)
-{
-
+	return path;
 }

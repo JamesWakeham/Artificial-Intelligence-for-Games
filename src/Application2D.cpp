@@ -7,18 +7,17 @@
 #include "Texture.h"
 #include "Font.h"
 
-#include <glm\mat3x3.hpp>
-#include <glm\glm.hpp>
-#include <glm\gtc\type_ptr.hpp>
+
 
 Graph * graph;
 
 Application2D::Application2D() 
 {
 	graph = new Graph();
-	std::list<Graph::Node*> endNodes;
-	endNodes.push_back(&graph->grid[8][8]);
-	graph->FindShortestPath(&graph->grid[1][1], endNodes);
+	//std::list<Graph::Node*> endNodes;
+	//endNodes.push_back(&graph->grid[8][8]);
+	//agent.path = graph->FindShortestPath(&graph->grid[1][1], endNodes);
+	agent.graph = graph;
 }
 
 Application2D::~Application2D() {
@@ -34,6 +33,8 @@ bool Application2D::startup() {
 	m_texture = new Texture("./bin/textures/crate.png");
 
 	m_font = new Font("./bin/font/consolas.ttf", 32);
+
+	agent.Start();
 
 	return true;
 }
@@ -53,6 +54,8 @@ bool Application2D::update(float deltaTime) {
 	if (hasWindowClosed() || isKeyPressed(GLFW_KEY_ESCAPE))
 		return false;
 
+	agent.Update();
+
 	// the applciation closes if we return false
 	return true;
 }
@@ -65,6 +68,7 @@ void Application2D::draw() {
 	// begin drawing sprites
 	m_spriteBatch->begin();
 
+	m_spriteBatch->drawSprite(m_texture, agent.pos.x * 50 + 25, agent.pos.y * 50 + 25, 20, 20);
 	for each (Graph::Node n in graph->grid)
 	{
 		m_spriteBatch->setSpriteColor(1, 1, 1, 1);
@@ -78,6 +82,7 @@ void Application2D::draw() {
 			m_spriteBatch->drawLine(n.pos.x * 50 + 25, n.pos.y * 50 + 25, e.connection->pos.x * 50 + 25, e.connection->pos.y * 50 + 25, e.cost*2, 1);
 		}
 	}
+	
 
 	//m_spriteBatch->drawLine(300, 300, 600, 400, 10, 1);
 

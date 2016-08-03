@@ -8,6 +8,11 @@ bool ReturnGScore(const Graph::Node & _nodea, const Graph::Node & _nodeb) {
 }
 
 int main() {
+
+	//glm::vec2 temp = glm::vec2(1, 1);
+	//glm::vec2 temp2 = glm::vec2(1, 2);
+	//std::cout << glm::distance(temp, temp2)*(10);
+
 	//std::list<Graph::Node> openList;
 	//openList.push_front(Graph::Node(glm::vec2(1,4),13,nullptr));
 	//openList.push_front(Graph::Node(glm::vec2(1, 4), 3, nullptr));

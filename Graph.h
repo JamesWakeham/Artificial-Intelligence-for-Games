@@ -53,8 +53,6 @@ public:
 
 	void AddConnection(Node *n1, Node *n2, float cost);
 
-	void FindShortestPath(Node *start, std::list<Node*> potentialEndNodes);
-
-	void FindNodesInRange(std::vector<Node *> &outNodes, float xPos, float yPos, float radius);
+	std::list<Graph::Node*> FindShortestPath(Node *start, std::list<Node*> potentialEndNodes);
 };
 

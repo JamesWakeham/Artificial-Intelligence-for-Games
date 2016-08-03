@@ -2,12 +2,21 @@
 
 #include "BaseApplication.h"
 #include "Graph.h"
+
+#include "Agent.h"
+
+#include <glm\mat3x3.hpp>
+#include <glm\glm.hpp>
+#include <glm\gtc\type_ptr.hpp>
+
 class SpriteBatch;
 class Texture;
 class Font;
 
 class Application2D : public BaseApplication {
 public:
+
+	Agent agent;
 
 	Application2D();
 	virtual ~Application2D();
