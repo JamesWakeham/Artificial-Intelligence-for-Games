@@ -15,12 +15,14 @@ public:
 	glm::vec2 vel;
 	glm::vec2 target;
 	Graph* graph;
-	bool scared;
+	int scared;
 	Agent();
 	~Agent();
 	void Start();
 	void Update();
 	void Seek(glm::vec2 _target);
 	void FindPath();
+
+	Agent* otherAgent;
 };
 

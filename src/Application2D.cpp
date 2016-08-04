@@ -18,7 +18,11 @@ Application2D::Application2D()
 	//endNodes.push_back(&graph->grid[8][8]);
 	//agent.path = graph->FindShortestPath(&graph->grid[1][1], endNodes);
 	agent.graph = graph;
+	agent.otherAgent = &agent2;
+
 	agent2.graph = graph;
+	agent2.otherAgent = &agent;
+
 }
 
 Application2D::~Application2D() {

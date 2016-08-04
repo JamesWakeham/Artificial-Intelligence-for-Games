@@ -25,7 +25,13 @@ void Agent::Start()
 
 void Agent::Update()
 {
-	if (!scared) {
+	if (scared >= 1) {
+		scared--;
+		vel = pos - otherAgent->pos;
+		if (scared <= 0) {
+			FindPath();
+		}
+	} else if (scared <= 0){
 		if ((float)glm::distance(pos, target) < 0.1f) {
 			if (path.size() > 1) path.pop_back();
 			else {
@@ -34,12 +40,17 @@ void Agent::Update()
 			target = path.back()->pos;
 		}
 		vel = target - pos;
-	} else if (scared){
-	
+		if (glm::distance(pos, otherAgent->pos) < 1.0f) {
+			scared = 60;
+		}
 	}
 	vel = glm::normalize(vel);
 	vel = vel*0.03f;
 	pos = pos + vel;
+	if (pos.x < 0) pos.x = 0;
+	if (pos.y < 0) pos.y = 0;
+	if (pos.x > 9) pos.x = 9;
+	if (pos.y > 9) pos.y = 9;
 }
 
 void Agent::Seek(glm::vec2 _target)
