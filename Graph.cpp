@@ -68,6 +68,8 @@ std::list<Graph::Node*> Graph::FindShortestPath(Node * start, std::list<Node*> p
 		for (int y = 0; y < 10; y++)
 		{
 			grid[x][y].parent = nullptr;
+			grid[x][y].tested = false;
+			grid[x][y].traversed = false;
 		}
 	}
 	int gScore =0;
@@ -151,5 +153,6 @@ std::list<Graph::Node*> Graph::FindShortestPath(Node * start, std::list<Node*> p
 		currentNode = currentNode->parent;
 	}
 	std::cout << "Path Generated with " << path.size() << " Hops" << std::endl;
+
 	return path;
 }

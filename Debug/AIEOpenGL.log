@@ -1,4 +1,2 @@
-﻿  Graph.cpp
-c:\users\james.wakeham\documents\github\artificial-intelligence-for-games\graph.cpp(11): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\james.wakeham\documents\github\artificial-intelligence-for-games\graph.cpp(12): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+﻿  Agent.cpp
   AIEOpenGL.vcxproj -> C:\Users\james.wakeham\Documents\GitHub\Artificial-Intelligence-for-Games\bin\AIEOpenGL_d.exe

@@ -18,6 +18,7 @@ Application2D::Application2D()
 	//endNodes.push_back(&graph->grid[8][8]);
 	//agent.path = graph->FindShortestPath(&graph->grid[1][1], endNodes);
 	agent.graph = graph;
+	agent2.graph = graph;
 }
 
 Application2D::~Application2D() {
@@ -35,7 +36,7 @@ bool Application2D::startup() {
 	m_font = new Font("./bin/font/consolas.ttf", 32);
 
 	agent.Start();
-
+	agent2.Start();
 	return true;
 }
 
@@ -55,7 +56,7 @@ bool Application2D::update(float deltaTime) {
 		return false;
 
 	agent.Update();
-
+	agent2.Update();
 	// the applciation closes if we return false
 	return true;
 }
@@ -69,6 +70,7 @@ void Application2D::draw() {
 	m_spriteBatch->begin();
 
 	m_spriteBatch->drawSprite(m_texture, agent.pos.x * 50 + 25, agent.pos.y * 50 + 25, 20, 20);
+	m_spriteBatch->drawSprite(m_texture, agent2.pos.x * 50 + 25, agent2.pos.y * 50 + 25, 20, 20);
 	for each (Graph::Node n in graph->grid)
 	{
 		m_spriteBatch->setSpriteColor(1, 1, 1, 1);

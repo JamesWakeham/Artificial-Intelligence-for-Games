@@ -17,6 +17,7 @@ class Application2D : public BaseApplication {
 public:
 
 	Agent agent;
+	Agent agent2;
 
 	Application2D();
 	virtual ~Application2D();
