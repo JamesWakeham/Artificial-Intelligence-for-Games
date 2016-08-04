@@ -15,6 +15,7 @@ public:
 	glm::vec2 vel;
 	glm::vec2 target;
 	Graph* graph;
+	bool scared;
 	Agent();
 	~Agent();
 	void Start();
